@@ -48,8 +48,8 @@ require_once(IPP_PATH . 'include/db.php');
 require_once(IPP_PATH . 'include/auth.php');
 require_once(IPP_PATH . 'include/log.php');
 require_once(IPP_PATH . 'include/user_functions.php');
-require_once (IPP_PATH . 'include/config.inc.php');
-require_once (IPP_PATH . 'include/supporting_functions.php');
+require_once(IPP_PATH . 'include/config.inc.php');
+require_once(IPP_PATH . 'include/supporting_functions.php');
 
 header('Pragma: no-cache'); //don't cache this page!
 
@@ -332,7 +332,7 @@ if(isset($_POST['edit_coordination_of_services'])) {
 </HEAD>
     <BODY>
     <?php print_student_navbar($student_id, $student_row['first_name'] . " &nbsp" . $student_row['last_name']); ?>
-     <?php print_jumbotron_with_page_name("Edit Coordination of Services", $student_row['first_name'] . " " . $student_row['last_name'], $permission_level); ?>
+    <?php print_jumbotron_with_page_name("Edit Coordination of Services", $student_row['first_name'] . " " . $student_row['last_name'], $permission_level); ?>
     
     <table class="shadow" border="0" cellspacing="0" cellpadding="0" align="center">  
     
