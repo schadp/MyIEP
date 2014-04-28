@@ -38,7 +38,6 @@ require_once(IPP_PATH . 'include/db.php');
 require_once(IPP_PATH . 'include/auth.php');
 require_once(IPP_PATH . 'include/log.php');
 require_once(IPP_PATH . 'include/user_functions.php');
-require_once(IPP_PATH . 'include/navbar.php');
 require_once(IPP_PATH . 'include/supporting_functions.php');
 
 header('Pragma: no-cache'); //don't cache this page!
@@ -373,8 +372,12 @@ if(!$coord_result) {
        //output the javascript array for the chooser popup
        echoJSServicesArray();
     ?>
+  <?php print_bootstrap_head(); ?>
 </HEAD>
     <BODY>
+    <?php print_student_navbar($student_id, $student_row['first_name'] . " " . $student_row['last_name']); ?>    
+    <?php print_jumbotron_with_page_name("Coordination of Services", $student_row['first_name'] . " " . $student_row['last_name'], $our_permission); ?>
+       
         <table class="shadow" border="0" cellspacing="0" cellpadding="0" align="center">  
         <tr>
           <td class="shadow-topLeft"></td>
@@ -385,20 +388,11 @@ if(!$coord_result) {
             <td class="shadow-left"></td>
             <td class="shadow-center" valign="top">
                 <table class="frame" width=620px align=center border="0">
-                    <tr align="Center">
-                    <td><center><img src="<?php echo $page_logo_path; ?>"></center></td>
-                    </tr>
-                    <tr><td>
-                    <center><?php navbar("student_view.php?student_id=$student_id"); ?></center>
-                    </td></tr>
-                    <tr>
                         <td valign="top">
                         <div id="main">
                         <?php if ($system_message) { echo "<center><table width=\"80%\"><tr><td><p class=\"message\">" . $system_message . "</p></td></tr></table></center>";} ?>
 
-                        <center><table><tr><td><center><p class="header">-Coordination of Services(<?php echo $student_row['first_name'] . " " . $student_row['last_name']; ?>)-</p></center></td></tr></table></center>
-                        <BR>
-
+                  
                         <!-- BEGIN add new entry -->
                         <center>
                         <form name="add_coordination_of_services" enctype="multipart/form-data" action="<?php echo IPP_PATH . "coordination_of_services.php"; ?>" method="post" <?php if(!$have_write_permission) echo "onSubmit=\"return noPermission();\"" ?>>
@@ -497,20 +491,10 @@ if(!$coord_result) {
                 </table></center>
             </td>
             <td class="shadow-right"></td>   
-        </tr>
-        <tr>
-            <td class="shadow-left">&nbsp;</td>
-            <td class="shadow-center">
-             <?php navbar("student_view.php?student_id=$student_id"); ?>
-            </td>
-            <td class="shadow-right">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="shadow-bottomLeft"></td>
-            <td class="shadow-bottom"></td>
-            <td class="shadow-bottomRight"></td>
-        </tr>
-        </table> 
-        <center></center>
+
+        </table>
+
+        <?php print_complete_footer(); ?>
+        <?php print_bootstrap_js(); ?>
     </BODY>
 </HTML>

@@ -48,7 +48,7 @@ require_once(IPP_PATH . 'include/db.php');
 require_once(IPP_PATH . 'include/auth.php');
 require_once(IPP_PATH . 'include/log.php');
 require_once(IPP_PATH . 'include/user_functions.php');
-require_once(IPP_PATH . 'include/navbar.php');
+require_once(IPP_PATH . 'include/supporting_functions.php');
 
 header('Pragma: no-cache'); //don't cache this page!
 
@@ -198,8 +198,12 @@ mysql_data_seek($guardian_result,0);
               return false;
       }
     </SCRIPT>
+<?php print_bootstrap_head(); ?>
 </HEAD>
-<BODY>
+    <BODY>
+    <?php print_student_navbar($student_id, $student_row['first_name'] . " " . $student_row['last_name']); ?>    
+    <?php print_jumbotron_with_page_name("Guardian Notes", $student_row['first_name'] . " " . $student_row['last_name'], $our_permission); ?>
+
         <table class="shadow" border="0" cellspacing="0" cellpadding="0" align="center">  
         <tr>
           <td class="shadow-topLeft"></td>
@@ -210,12 +214,7 @@ mysql_data_seek($guardian_result,0);
             <td class="shadow-left"></td>
             <td class="shadow-center" valign="top">
                 <table class="frame" width=620px align=center border="0">
-                    <tr align="Center">
-                    <td><center><img src="<?php echo $page_logo_path; ?>"></center></td>
-                    </tr>
-                    <tr><td>
-                    <center><?php navbar("guardian_view.php?student_id=$student_id"); ?></center>
-                    </td></tr>
+                    
                     <tr>
                         <td valign="top">
                         <div id="main">
@@ -285,20 +284,8 @@ mysql_data_seek($guardian_result,0);
                 </table></center>
             </td>
             <td class="shadow-right"></td>   
-        </tr>
-        <tr>
-            <td class="shadow-left">&nbsp;</td>
-            <td class="shadow-center">
-            <?php navbar("guardian_view.php?student_id=$student_id"); ?>
-            </td>
-            <td class="shadow-right">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="shadow-bottomLeft"></td>
-            <td class="shadow-bottom"></td>
-            <td class="shadow-bottomRight"></td>
-        </tr>
         </table> 
-        <center></center>
+    <?php print_complete_footer(); ?>
+    <?php print_bootstrap_js(); ?>
     </BODY>
 </HTML>
