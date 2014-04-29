@@ -9,17 +9,25 @@
 //the authorization level for this page!
 $MINIMUM_AUTHORIZATION_LEVEL = 100; //everybody
 
-/**
- * edit_school_history.php
- *
- * Copyright (c) 2005 Grasslands Regional Division #6
- * All rights reserved
- *
- * Created: March 18, 2006
- * By: M. Nielsen
- * Modified:
- *
- */
+/** @file
+ * @brief   view student's school history
+ * @copyright   2014 Chelsea School 
+ * @copyright   2005 Grasslands Regional Division #6
+ * @copyright   This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * @authors   Rik Goldman, Sabre Goldman, Jason Banks, Alex, James, Paul, Bryan, TJ, Jonathan, Micah, Stephen, Joseph
+ * @author    M. Nielson
+ * @todo    
+ * 1. Filter input, escape output
+ * 2. bootstrap
+ * 3. spellcheck as necessary
+ * 4. navbars (student context)
+ */ 
+ 
+ 
 
 /*   INPUTS: $_GET['student_id'] || $_POST['student_id']
  *
@@ -41,6 +49,8 @@ require_once(IPP_PATH . 'include/log.php');
 require_once(IPP_PATH . 'include/user_functions.php');
 require_once(IPP_PATH . 'include/navbar.php');
 require_once(IPP_PATH . 'include/mail_functions.php');
+//require_once(IPP_PATH . 'include/config.inc.php');
+require_once(IPP_PATH . 'include/supporting_functions.php');
 
 header('Pragma: no-cache'); //don't cache this page!
 
@@ -320,8 +330,12 @@ $enum_options_type = mysql_enum_values("school_history","ipp_present");
        //output the javascript array for the chooser popup
        echoJSServicesArray();
     ?>
+    <?php print_bootstrap_head(); ?>
 </HEAD>
     <BODY>
+    <?php print_student_navbar($student_id, $student_row['first_name'] . " &nbsp" . $student_row['last_name']); ?>
+    <?php print_jumbotron_with_page_name("Edit School History", $student_row['first_name'] . " " . $student_row['last_name'], $permission_level); ?>
+    
         <table class="shadow" border="0" cellspacing="0" cellpadding="0" align="center">  
         <tr>
           <td class="shadow-topLeft"></td>
@@ -332,19 +346,10 @@ $enum_options_type = mysql_enum_values("school_history","ipp_present");
             <td class="shadow-left"></td>
             <td class="shadow-center" valign="top">
                 <table class="frame" width=620px align=center border="0">
-                    <tr align="Center">
-                    <td><center><img src="<?php echo $page_logo_path; ?>"></center></td>
-                    </tr>
-                    <tr><td>
-                    <center><?php navbar("school_history.php?student_id=$student_id"); ?></center>
-                    </td></tr>
-                    <tr>
+                    
                         <td valign="top">
                         <div id="main">
                         <?php if ($system_message) { echo "<center><table width=\"80%\"><tr><td><p class=\"message\">" . $system_message . "</p></td></tr></table></center>";} ?>
-
-                        <center><table><tr><td><center><p class="header">- IPP Edit School History-<BR>(<?php echo $student_row['first_name'] . " " . $student_row['last_name']; ?>)</p></center></td></tr></table></center>
-                        <BR>
 
                         <!-- BEGIN edit history entry -->
                         <center>
@@ -421,16 +426,13 @@ $enum_options_type = mysql_enum_values("school_history","ipp_present");
         <tr>
             <td class="shadow-left">&nbsp;</td>
             <td class="shadow-center">
-             <?php navbar("school_history.php?student_id=$student_id"); ?>
+             
             </td>
             <td class="shadow-right">&nbsp;</td>
         </tr>
-        <tr>
-            <td class="shadow-bottomLeft"></td>
-            <td class="shadow-bottom"></td>
-            <td class="shadow-bottomRight"></td>
-        </tr>
+        
         </table> 
-        <center></center>
+        <?php print_complete_footer(); ?>
+        <?php print_bootstrap_js(); ?>
     </BODY>
 </HTML>

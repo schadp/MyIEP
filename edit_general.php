@@ -54,7 +54,7 @@ require_once(IPP_PATH . 'include/db.php');
 require_once(IPP_PATH . 'include/auth.php');
 require_once(IPP_PATH . 'include/log.php');
 require_once(IPP_PATH . 'include/user_functions.php');
-require_once(IPP_PATH . 'include/navbar.php');
+require_once(IPP_PATH . 'include/supporting_functions.php');
 
 header('Pragma: no-cache'); //don't cache this page!
 
@@ -215,8 +215,12 @@ if(!$student_result) {
     
     <script language="javascript" src="<?php echo IPP_PATH . "include/popcalendar.js"; ?>"></script>
 
+<?php print_bootstrap_head(); ?>
 </HEAD>
     <BODY>
+    <?php print_student_navbar($student_id, $student_row['first_name'] . " " . $student_row['last_name']); ?>    
+    <?php print_jumbotron_with_page_name("General Information", $student_row['first_name'] . " " . $student_row['last_name'], $our_permission); ?>
+
         <table class="shadow" border="0" cellspacing="0" cellpadding="0" align="center">  
         <tr>
           <td class="shadow-topLeft"></td>
@@ -227,20 +231,12 @@ if(!$student_result) {
             <td class="shadow-left"></td>
             <td class="shadow-center" valign="top">
                 <table class="frame" width=620px align=center border="0">
-                    <tr align="Center">
-                    <td><center><img src="<?php echo $page_logo_path; ?>"></center></td>
-                    </tr>
-                    <tr><td>
-                    <center><?php navbar("student_view.php?student_id=$student_id"); ?></center>
-                    </td></tr>
-                    <tr>
+                    
                         <td valign="top">
                         <div id="main">
                         <?php if ($system_message) { echo "<center><table width=\"80%\"><tr><td><p class=\"message\">" . $system_message . "</p></td></tr></table></center>";} ?>
 
-                        <center><table><tr><td><center><p class="header">- Edit General Information-</p></center></td></tr></table></center>
-                        <BR>
-
+                   
                         <center>
                         <form name="addName" enctype="multipart/form-data" action="<?php echo IPP_PATH . "edit_general.php"; ?>" method="post">
                         <table border="0" cellpadding="0" cellspacing="0" width="80%">
@@ -288,7 +284,6 @@ if(!$student_result) {
                                  <OPTION value="10" <?php if($student_row['current_grade'] == "10") echo "selected"; ?>>10
                                  <OPTION value="11" <?php if($student_row['current_grade'] == "11") echo "selected"; ?>>11
                                  <OPTION value="12" <?php if($student_row['current_grade'] == "12") echo "selected"; ?>>12
-                                 <OPTION value="13" <?php if($student_row['current_grade'] == "13") echo "selected"; ?>>13
                             </SELECT>
                           </td>
                         </tr>
@@ -298,6 +293,7 @@ if(!$student_result) {
                             <SELECT name="gender">
                                 <option value="M" <?php if($student_row['gender'] == "M") echo "SELECTED"; ?>>Male
                                 <option value="F" <?php if($student_row['gender'] == "F") echo "SELECTED"; ?>>Female
+                                <option value="O" <?php if($student_row['gender'] == "O") echo "SELECTED"; ?>>Other
                             </SELECT>
                           </td>
                         </tr>
@@ -317,26 +313,17 @@ if(!$student_result) {
                         </form>
                         </center>
 
+ 
+
+
                         </div>
                         </td>
                     </tr>
                 </table></center>
             </td>
             <td class="shadow-right"></td>   
-        </tr>
-        <tr>
-            <td class="shadow-left">&nbsp;</td>
-            <td class="shadow-center">
-            <?php navbar("student_view.php?student_id=$student_id"); ?>
-            </td>
-            <td class="shadow-right">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="shadow-bottomLeft"></td>
-            <td class="shadow-bottom"></td>
-            <td class="shadow-bottomRight"></td>
-        </tr>
         </table> 
-        <center></center>
+    <?php print_complete_footer(); ?>
+    <?php print_bootstrap_js(); ?>
     </BODY>
 </HTML>

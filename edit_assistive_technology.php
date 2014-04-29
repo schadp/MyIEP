@@ -258,7 +258,7 @@ if(isset($_POST['edit_asst_tech']) && $have_write_permission) {
 </HEAD>
     <BODY>
     <?php print_student_navbar($student_id, $student_row["first_name"] . " " . $student_row["last_name"]); ?>
-    <?php print_jumbotron_with_page_name("Edit Transition Plan", $student_row["first_name"] . " " . $student_row["last_name"], $permission_level); ?>
+    <?php print_jumbotron_with_page_name("Edit Assistive Technology", $student_row["first_name"] . " " . $student_row["last_name"], $permission_level); ?>
         <table class="shadow" border="0" cellspacing="0" cellpadding="0" align="center">  
             
                

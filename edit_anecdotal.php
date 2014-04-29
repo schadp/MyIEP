@@ -180,7 +180,7 @@ if(isset($_POST['edit_anecdotal_report']) && $have_write_permission) {
 </HEAD>
     <BODY>
     <?php print_student_navbar($student_id, $student_row['first_name'] . " " . $student_row['last_name']); ?>    
-    <?php print_jumbotron_with_page_name("Edit Anecdotal", $student_row['first_name'] . " " . $student_row['last_name'], $our_permission); ?>
+    <?php print_jumbotron_with_page_name("Edit Anecdotals", $student_row['first_name'] . " " . $student_row['last_name'], $our_permission); ?>
 
         <table class="shadow" border="0" cellspacing="0" cellpadding="0" align="center">  
         <tr>
